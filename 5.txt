@@ -1,0 +1,23 @@
+# 1. pull latest
+git pull
+
+# 2. create tag
+git tag v1.0
+
+# 3. list tags
+git tag
+
+# 4. annotated tag
+git tag -a v1.1 -m "Version 1.1"
+
+# 5. push tag
+git push origin v1.0
+
+# 6. push all tags
+git push --tags
+
+# 7. delete local tag
+git tag -d v1.0
+
+# 8. delete remote tag
+git push origin -d v1.0

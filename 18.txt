@@ -1,0 +1,72 @@
+1. Dockerfile
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY . /app
+RUN javac Calculator.java
+CMD ["java", "Calculator"]
+ 2. Calculator.java (updated – accepts + - * /)
+import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        double a = sc.nextDouble();
+
+        System.out.print("Enter second number: ");
+        double b = sc.nextDouble();
+
+        System.out.print("Enter operation (+, -, *, /): ");
+        char op = sc.next().charAt(0);
+
+        switch (op) {
+            case '+':
+                System.out.println("Result: " + (a + b));
+                break;
+            case '-':
+                System.out.println("Result: " + (a - b));
+                break;
+            case '*':
+                System.out.println("Result: " + (a * b));
+                break;
+            case '/':
+                if (b != 0)
+                    System.out.println("Result: " + (a / b));
+                else
+                    System.out.println("Cannot divide by zero");
+                break;
+            default:
+                System.out.println("Invalid operator");
+        }
+
+        sc.close();
+    }
+}
+Commands (run in order)
+# 1. go to project folder
+cd C:\Users\joshy\OneDrive\Desktop\misc\Docker-Java
+
+# 2. build docker image
+docker build -t java-app .
+
+# 3. check images
+docker images
+
+# 4. run container (interactive)
+docker run -it java-app
+
+# 5. login to docker hub
+docker login
+
+# 6. tag image (IMPORTANT: no < > symbols)
+docker tag java-app sumukh624/java-app:v1
+
+# 7. push image to docker hub
+docker push sumukh624/java-app:v1
+
+# 8. verify locally
+docker images
+
+# 9. (optional) pull from docker hub
+docker pull sumukh624/java-app:v1

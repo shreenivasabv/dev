@@ -1,0 +1,52 @@
+# 1. run nginx container without port mapping
+docker run -d nginx
+
+# 2. run nginx container with port mapping
+docker run -d -p 8080:80 nginx
+
+# 3. verify running containers
+docker ps
+
+# 4. open in browser
+http://localhost:8080
+
+# 5. create docker volume
+docker volume create myvolume
+
+# 6. list volumes
+docker volume ls
+
+# 7. run container with volume
+docker run -it -v myvolume:/data ubuntu bash
+
+# 8. inside container create file
+cd /data
+echo "Docker Volume Persistence Test" > test.txt
+exit
+
+# 9. run new container with same volume
+docker run -it -v myvolume:/data ubuntu bash
+
+# 10. verify file exists
+cat /data/test.txt
+exit
+
+# 11. run nginx with volume + port mapping
+docker run -d -p 8081:80 -v myvolume:/usr/share/nginx/html nginx
+
+# 12. add html file to volume
+docker run -it -v myvolume:/data ubuntu bash
+echo "<h1>Persistent Web Page</h1>" > /data/index.html
+exit
+
+# 13. open in browser
+http://localhost:8081
+
+# 14. check running containers
+docker ps
+
+# 15. check volumes
+docker volume ls
+
+# 16. inspect volume
+docker volume inspect myvolume

@@ -1,0 +1,65 @@
+step 1 : create a new file
+
+step 2 : mvn archetype:generate
+
+step 3 : enter->enter->com.bnmit->sample-app->enter->com.bnmit
+
+step 4 : change the app.java code and apptest.java code to calculator.java and calculatortest.java
+
+calculator.java:
+package com.bnmit;
+
+public class Calculator {
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+
+    public int divide(int a, int b) {
+        return a / b;
+    }
+}
+
+calculatortest.java
+package com.bnmit;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+public class CalculatorTest {
+
+    Calculator calc = new Calculator();
+
+    @Test
+    void testAdd() {
+        assertEquals(5, calc.add(2, 3));
+    }
+
+    @Test
+    void testSubtract() {
+        assertEquals(1, calc.subtract(3, 2));
+    }
+
+    @Test
+    void testMultiply() {
+        assertEquals(6, calc.multiply(2, 3));
+    }
+
+    @Test
+    void testDivide() {
+        assertEquals(2, calc.divide(6, 3));
+    }
+}
+
+step 5 : go inside the sample-app directory and then type mvn clean test
+
+step 6 : show the number of test cases passed as output

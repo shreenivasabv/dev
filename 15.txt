@@ -1,0 +1,29 @@
+# 1. check docker version
+docker --version
+
+# 2. check running containers
+docker ps
+
+# 3. list docker images
+docker images
+
+# 4. run hello-world container
+docker run hello-world
+
+# 5. pull nginx image
+docker pull nginx
+
+# 6. run nginx container (detached mode + port mapping)
+docker run -d -p 8085:80 nginx
+
+# 7. check running containers
+docker ps
+
+# 8. stop container
+docker stop container_id
+
+# 9. remove container
+docker rm container_id
+
+# 10. verify no containers running
+docker ps

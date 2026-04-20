@@ -1,0 +1,13 @@
+step 1 : add the src file(calculator.java and calculatortest.java) and pom.xml file to GitHub which is done in exp 12
+
+step 2: choose maven project 
+
+step 3 : add repository link to code by choosing git
+
+step 4 : give pool scm * * * * * 
+
+step 5 : in goals and options type package 
+
+step 6 : add the archive file artifacts there type target/*.jar
+
+step 7 : build it

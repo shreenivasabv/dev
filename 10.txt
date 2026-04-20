@@ -1,0 +1,11 @@
+step 1 : login to Jenkins 
+
+step 2: choose pipeline 
+
+step 3 : add repository link to code by choosing git which contains Jenkins file  code
+
+step 4 : give pool scm * * * * * and select git hub hook trigger
+
+step 5 : build it
+
+step 6 : debug if error occurs (if invigilator asks do it by creating error)

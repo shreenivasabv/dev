@@ -1,0 +1,30 @@
+# 1. clone repo
+git clone <repo_url>
+cd <repo_name>
+
+# 2. create file
+echo "Master file" > file1.txt
+git add .
+git commit -m "Initial commit"
+git push origin main
+
+# 3. create branch
+git checkout -b feature-1
+
+# 4. modify file
+echo "Feature change" >> file1.txt
+git add .
+git commit -m "Feature update"
+
+# 5. push branch
+git push origin feature-1
+
+# 6. (GitHub UI)
+# create pull request → review → merge
+
+# 7. update local
+git checkout main
+git pull origin main
+
+# 8. delete branch
+git branch -d feature-1

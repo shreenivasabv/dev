@@ -1,0 +1,34 @@
+# 1. create folder
+mkdir Git_Lab_Experiment1
+
+# 2. move into folder
+cd Git_Lab_Experiment1
+
+# 3. initialize git
+git init
+
+# 4. configure git
+git config --global user.name "Your Name"
+git config --global user.email "your_email@example.com"
+
+# 5. create file
+echo "This is my first Git experiment" > README.txt
+
+# 6. check status
+git status
+
+# 7. add file
+git add README.txt
+
+# 8. commit
+git commit -m "Initial commit"
+
+# 9. modify file
+echo "Git tracks file changes" >> README.txt
+
+# 10. add & commit again
+git add README.txt
+git commit -m "Updated README"
+
+# 11. view history
+git log

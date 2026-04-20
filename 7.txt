@@ -1,0 +1,15 @@
+step 1 : login to Jenkins 
+
+step 2: choose freestyle project 
+
+step 3 : add repository link to code by choosing git which contains calculator.java code
+
+step 4 : in execute windows batch command type 
+echo "hello jenkins" 
+javac Calculator.java
+echo 5 6 1| java Calculator
+or give java calculator only by specifying input and operation 
+
+step 5 : Post-build Actions → Archive artifacts → *.class
+
+step 6 : build it

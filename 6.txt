@@ -1,0 +1,20 @@
+# 1. check maven
+mvn --version
+
+# 2. create project
+mvn archetype:generate
+
+# 3. go to project
+cd sample-app
+
+# 4. build project
+mvn package
+
+# 5. clean project
+mvn clean
+
+# 6. generate site
+mvn site
+
+# 7. run jar
+java -cp target/sample-app-1.0-SNAPSHOT.jar com.bnmit.App

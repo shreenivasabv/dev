@@ -1,0 +1,258 @@
+🔹 STEP 1: Generate Maven Web Application
+Open Command Prompt
+Navigate to working directory
+cd Desktop\misc\ex20
+Run:
+mvn archetype:generate
+Type filter:
+maven-archetype-webapp
+Select the correct archetype (1)
+Enter details:
+GroupId: com.bnmit
+ArtifactId: jenkins-tomcat-maven-tested
+Version: 1.0-SNAPSHOT
+Package: com.bnmit
+
+👉 Project will be created
+
+🔹 STEP 2: Create Java Folder Structure
+
+Go inside project:
+
+cd jenkins-tomcat-maven-tested
+
+Create folders:
+create ->src -> main -> java -> com -> bnmit
+🔹 STEP 3: Add Servlet Code
+
+📄 File: HelloServlet.java
+Location: src/main/java/com/bnmit
+
+package com.bnmit;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class HelloServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+                         throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Deployment Successful!</h2>");
+        out.println("<h3>GitHub -> Jenkins -> Docker -> Tomcat</h3>");
+    }
+}
+🔹 STEP 4: Configure web.xml
+
+📄 Location: src/main/webapp/WEB-INF/web.xml
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bnmit</groupId>
+    <artifactId>jenkins-tomcat-maven-tested</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+
+    <name>sample-webapp</name>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>sample-webapp</finalName>
+    </build>
+
+</project>
+
+🔹 STEP 5: Modify index.jsp
+
+📄 Location: src/main/webapp/index.jsp
+
+<html>
+<body>
+<h1>Welcome to CI/CD Pipeline Demo</h1>
+<a href="hello">Click Here</a>
+</body>
+</html>
+🔹 STEP 6: Modify pom.xml
+
+📄 File: pom.xml
+
+Add:
+
+<packaging>war</packaging>
+
+<dependencies>
+<dependency>
+<groupId>javax.servlet</groupId>
+<artifactId>javax.servlet-api</artifactId>
+<version>4.0.1</version>
+<scope>provided</scope>
+</dependency>
+</dependencies>
+
+<build>
+<finalName>sample-webapp</finalName>
+</build>
+🔹 STEP 7: Build Maven Project
+
+Run:
+
+mvn clean package
+
+👉 Output:
+
+target/sample-webapp.war
+🔹 STEP 8: Create Dockerfile
+
+📄 Location: project root
+
+Create file: Dockerfile
+
+FROM tomcat:9
+COPY target/sample-webapp.war /usr/local/tomcat/webapps/
+🔹 STEP 9: Build Docker Image
+
+Run:
+
+docker build -t sample-webapp .
+
+Check:
+
+docker images
+🔹 STEP 10: Run Docker Container
+
+👉 First clean old containers:
+
+docker stop sample-webapp-container
+docker rm sample-webapp-container
+
+👉 Run:
+
+docker run -d -p 8087:8080 --name sample-webapp-container sample-webapp
+🔹 STEP 11: Verify Application
+
+Open browser:
+
+http://localhost:8087/sample-webapp
+
+Click link → Output:
+
+Deployment Successful!
+GitHub → Jenkins → Docker → Tomcat
+
+🔹 STEP 12: Create Jenkinsfile
+
+📄 File: Jenkinsfile (project root)
+
+pipeline {
+    agent any
+
+    tools {
+        maven 'mymaven'
+        jdk 'myjdk'
+    }
+
+    stages {
+
+        stage('Build WAR') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t sample-webapp .'
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                bat 'docker stop sample-webapp-container || exit 0'
+                bat 'docker rm sample-webapp-container || exit 0'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                bat 'docker run -d -p 8087:8080 --name sample-webapp-container sample-webapp'
+            }
+        }
+    }
+}
+🔹 STEP 13: Push to GitHub
+git init
+git add .
+git commit -m "CI/CD Project"
+git branch -M main
+git remote add origin https://github.com/your-username/repo-name.git
+git push -u origin main
+
+🔹 STEP 14: Configure Jenkins
+
+Open:
+
+http://localhost:8080
+
+Go to:
+
+Manage Jenkins → Global Tool Configuration
+
+Add:
+
+JDK → myjdk
+Maven → mymaven
+🔹 STEP 15: Create Pipeline Job
+New Item
+Name: CI-CD-Pipeline
+Select Pipeline
+
+Configure:
+
+SCM → Git
+Enter repo URL
+Branch → main
+Script path → Jenkinsfile
+🔹 STEP 16: Run Pipeline
+
+Click:
+
+Build Now
+
+🔹 STEP 17: Verify Pipeline
+
+Check:
+
+✔ Console Output → SUCCESS
+✔ Docker container running
+
+🔹 STEP 18: Final Output
+
+Open:
+
+http://localhost:8087/sample-webapp
+
+👉 Output:
+
+Deployment Successful!
+GitHub → Jenkins → Docker → Tomcat

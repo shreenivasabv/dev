@@ -1,0 +1,23 @@
+# 1. clone repo
+git clone <repo_url>
+
+# 2. move into repo
+cd <repo_name>
+
+# 3. create file
+echo "Hello GitHub" > file.txt
+
+# 4. add file
+git add file.txt
+
+# 5. commit
+git commit -m "Added file"
+
+# 6. push
+git push origin main
+
+# 7. fetch changes
+git fetch origin
+
+# 8. pull changes
+git pull origin main

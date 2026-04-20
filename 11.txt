@@ -1,0 +1,99 @@
+ Step 1: Open Eclipse
+Launch Eclipse
+Click: File → New → Java Project
+Project name: bnmit
+Click Finish
+ Step 2: Create Calculator Class
+
+ Right click on project
+→ New → Class
+→ Name: Calculator
+
+Paste code:
+
+package com.bnmit;
+
+public class Calculator {
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+
+    public int divide(int a, int b) {
+        return a / b;
+    }
+}
+ Step 3: Add JUnit Library (IMPORTANT)
+
+ Right click project
+→ Build Path → Add Libraries
+→ Select JUnit
+→ Choose JUnit 5
+→ Finish
+
+✔ This is what your video shows
+
+ Step 4: Create Test Class
+
+ Right click project
+→ New → JUnit Test Case
+→ Name: CalculatorTest
+→ Finish
+
+ Step 5: Write Test Cases
+
+Paste:
+
+package com.bnmit;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+class CalculatorTest {
+
+    Calculator calc = new Calculator();
+
+    @Test
+    void testAdd() {
+        assertEquals(5, calc.add(2, 3));
+    }
+
+    @Test
+    void testSubtract() {
+        assertEquals(1, calc.subtract(3, 2));
+    }
+
+    @Test
+    void testMultiply() {
+        assertEquals(6, calc.multiply(2, 3));
+    }
+
+    @Test
+    void testDivide() {
+        assertEquals(2, calc.divide(6, 3));
+    }
+}
+ Step 6: Run Test Cases
+if there is  error remove the module info file that is the issue caused
+
+ Right click CalculatorTest.java
+→ Run As → JUnit Test
+
+ Step 7: Observe Output
+
+ You will see:
+
+ Green bar
+ All tests passed
+
+ Result
+Calculator tested successfully
+All test cases passed

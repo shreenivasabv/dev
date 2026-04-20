@@ -1,0 +1,26 @@
+step 1 : open Jenkins and docker desktop
+step 2 : select pipeline and there type pipeline script code 
+
+  pipeline {
+    agent any
+    stages {
+        stage('Clone Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/sumukh624-hub/docker_jenkins.git'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t my-app .'
+            }
+        }
+        stage('Run Container') {
+            steps {
+                bat 'docker run -d my-app'
+            }
+        }
+    }
+}
+
+step 3: build and show the output

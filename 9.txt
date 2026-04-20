@@ -1,0 +1,49 @@
+step 1 : login to Jenkins 
+
+step 2: choose pipeline 
+
+step 3 : choose pipeline script and type the script 
+pipeline { 
+    agent any 
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Fetching source code...'
+            }
+        }
+
+        stage('Plan') {
+            steps {
+                echo 'Planning...'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo 'Packaging application...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+}
+
+step 4 : build it 
